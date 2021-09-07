@@ -1,3 +1,4 @@
+import { refs } from './refs';
 export default class PixabyApiService {
   constructor() {
     this.searchQuery = '';
@@ -12,10 +13,12 @@ export default class PixabyApiService {
       .then(r => r.json())
       .then(data => {
         this.incrementPage();
-
+        
         return data.hits;
       })
-      .catch(err => console.log('Error'));
+      .catch(err => console.log(err)
+       
+    );
   }
 
   incrementPage() {
@@ -24,6 +27,7 @@ export default class PixabyApiService {
 
   resetPage() {
     this.page = 1;
+   
   }
 
   get query() {
@@ -34,4 +38,3 @@ export default class PixabyApiService {
     this.searchQuery = newQuery;
   }
 }
-//2123

@@ -18,19 +18,25 @@ function onSearch(e) {
   pixabyApiService.query = e.currentTarget.elements.query.value;
   pixabyApiService.resetPage();
   pixabyApiService.fetchArticles().then(data => {
-    errorResult(data);
-    clearArticlesContainer();
-  });
-  refs.loadMoreBtn.classList.add('is-open');
-}
-
-function errorResult(data) {
-  if (data.length === 0) {
-    error({
+    if (data.length <= 0) {
+      error({
       text: 'Изображение не найдено.',
       delay: 1500,
     });
-  }
+      console.log('data 0')
+       refs.loadMoreBtn.classList.add('is-hidden');
+    }
+    else {
+      errorResult(data);
+      clearArticlesContainer();
+        refs.loadMoreBtn.classList.add('is-open');
+    }
+  });
+
+}
+
+function errorResult(data) {
+ 
   pixabyApiService.fetchArticles().then(appArticlesMarkup);
   return;
 }
